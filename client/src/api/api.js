@@ -1,5 +1,5 @@
 export const fetchRecommendations = async (query) => {
-  const res = await fetch("http://localhost:5000/api/recommend", {
+  const res = await fetch("https://recommandationsystemusingllm.onrender.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
