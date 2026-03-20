@@ -7,13 +7,27 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// ✅ FIXED CORS (allow your Vercel frontend)
+app.use(
+  cors({
+    origin: "https://recommandation-system-using-llm.vercel.app",
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 
+// ✅ ROUTE (already correct)
 app.use("/api/recommend", recommendRoute);
 
-const PORT = 5000;
+// ✅ OPTIONAL (avoid 404 on base URL)
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
+
+// ✅ FIXED PORT (CRITICAL for Render)
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
