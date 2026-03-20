@@ -16,12 +16,12 @@ router.post("/", async (req, res) => {
     let aiResponse;
 
     try {
-  aiResponse = await getAIRecommendation(query, products);
-} catch (err) {
-  console.log("AI ERROR:", err.message); // 👈 add this
-  console.log("AI failed, using fallback");
-  aiResponse = JSON.stringify(products.map((p) => p.name));
-}
+      aiResponse = await getAIRecommendation(query, products);
+    } catch (err) {
+      console.log("AI ERROR:", err.message);
+      console.log("AI failed, using fallback");
+      aiResponse = JSON.stringify(products.map((p) => p.name));
+    }
 
     const filteredProducts = filterProducts(aiResponse, products, query);
 
